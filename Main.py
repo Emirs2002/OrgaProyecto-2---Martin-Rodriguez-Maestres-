@@ -97,10 +97,24 @@ def main():
                             \n3.- Volver al menú principal
                             \n-->''') 
                 if op2 == 1:
-                  print('por cota')   
+                  cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
+                  indice_pintura = searchById(indice_cotas, 0, len(indice_cotas) - 1, cota)
+                  if indice_pintura != -1:
+                    pintura_buscada = pinturas_db[indice_pintura]
+                    pintura_buscada.showPintura()
+                  else:
+                    print("La pintura consultada no fue encontrada.")
+                    print("")
 
                 if op2 == 2:
-                  print('por nombre')   
+                  nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
+                  indice_pintura = searchByName(indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                  if indice_pintura != -1:
+                    pintura_buscada = pinturas_db[indice_pintura]
+                    pintura_buscada.showPintura()
+                  else:
+                    print("La pintura consultada no fue encontrada.")
+                    print("")
 
                 if op2 == 3:
                   break                   

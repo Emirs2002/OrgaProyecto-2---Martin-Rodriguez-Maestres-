@@ -52,7 +52,7 @@ def check_num(anho, msg):
                 continue    
     return num
 
-#valir el estado de la pintura
+#validar el estado de la pintura
 
 def check_status(msg):
     while True:
@@ -174,7 +174,31 @@ def insertNameIndex(nombre, pos, indice_nombres):
 
 #####       BÚSQUEDA       ######
 
+# Por cota
+def searchById(array, first, last, x):
+    if first <= last:
+        mid = (first + last) // 2
+        if x == array[mid]["cota"]:
+            return array[mid]["posicion"]
+        if x < array[mid]["cota"]:
+            return searchById(array, first, mid - 1, x)
+        else:
+            return searchById(array, mid + 1, last, x)
+    else:
+        return -1
 
+# Por nombre
+def searchByName(array, first, last, x):
+    if first <= last:
+        mid = (first + last) // 2
+        if x == array[mid]["nombre"]:
+            return array[mid]["posicion"]
+        if x < array[mid]["nombre"]:
+            return searchByName(array, first, mid - 1, x)
+        else:
+            return searchByName(array, mid + 1, last, x)
+    else:
+        return -1
 
 #####       GUARDADO Y CARGA       ######
 
