@@ -1,4 +1,5 @@
 from tools import *
+from Pintura import Pintura
 
 def main():
     pinturas_db = []
@@ -22,12 +23,27 @@ def main():
             \n6.- Guardar y Salir
             \n==>''') 
         if op == 0:
-            print("mango txt mango")
+            for pint in range(len(pinturas_db)):
+               pintura = pinturas_db[pint]
+               print(f"PINTURA {pint+1}")
+               pintura.showPintura()
+               print("")
+               print("")
+               print("")
+               print("")
 
 
           #Insertar pinturas en la bd e indices
         if op == 1:           
-            print("a")
+            cota = check_cota("Introduzca la cota de la pintura\n==>")
+            nombre = check_let("Introduzca el nombre de la pintura\n==>")
+            precio = check_num(False, "Introduzca el precio de la pintura\n==>")
+            anho = check_num(True, "Introduzca el año de la pintura\n==>")
+            status = check_status("Introduzca el status de la pintura\n==>")
+            
+            pintura = Pintura(cota, nombre.capitalize(), precio, anho, status.capitalize(), True)
+
+            pinturas_db.append(pintura)
 
           #Consultar pinturas
         if op == 2:  
