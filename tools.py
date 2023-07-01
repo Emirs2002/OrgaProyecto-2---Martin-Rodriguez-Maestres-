@@ -172,3 +172,9 @@ def insertNameIndex(nombre, pos, indice_nombres):
 
     return sorted_indice_nombres
 
+#####       BÚSQUEDA       ######
+
+
+
+#####       GUARDADO Y CARGA       ######
+
