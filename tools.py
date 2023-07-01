@@ -116,3 +116,40 @@ def check_cota(msg):
             continue
     
     return cotaNew
+
+#####           INSERCION PINTURAS      ######
+
+def insertPainting(painting, painting_db):
+    if len(painting_db) == 0:
+        pintura_pos = 0
+        painting_db.append(painting)
+    else:
+        pintura_pos = (len(painting_db))
+        painting_db.append(painting)
+    
+    return painting_db, pintura_pos
+
+#####       INSERCION DE ELEMENTOS EN LOS INDICES       ######
+
+# INDICE DE LAS COTAS
+
+def insertIdIndex(cota, pos, indice_cotas):
+    dicCota = {"cota": cota, "posicion":pos}
+
+    indice_cotas.append(dicCota)
+    
+    sorted_indice_cotas = sorted(indice_cotas, key=lambda x:x["cota"])
+
+    return sorted_indice_cotas
+
+
+#INDICE DE LOS NOMBRES
+def insertNameIndex(nombre, pos, indice_nombres):
+    dicName = {"nombre":nombre, "posicion": pos}
+
+    indice_nombres.append(dicName)
+
+    sorted_indice_nombres = sorted(indice_nombres, key=lambda x:x["nombre"])
+
+    return sorted_indice_nombres
+

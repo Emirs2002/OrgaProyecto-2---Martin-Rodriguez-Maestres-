@@ -2,16 +2,20 @@ from tools import *
 from Pintura import Pintura
 
 def main():
+    #DECLARACION LISTAS
     pinturas_db = []
     indice_cotas = []
     indice_nombres = []
-    
+
+    pintura_pos = 0  #guardar la posicion de la pintura para insertarlo en los indices
 
     while True:
 
         print("")
+        print("")
         print("***BIENVENIDO AL HIMALAYA***")
         print("")
+      
                               #Menú principal
         op = check_op(0, 6, '''Ingrese la opción que desea realizar:
             \n0.- Cargar Datos
@@ -29,11 +33,22 @@ def main():
                pintura.showPintura()
                print("")
                print("")
-               
+            
+            for cot in range(len(indice_cotas)):
+               cota = indice_cotas[cot]
+               print(cota)
 
+            print("")
+            print("")
+            print("")
+               
+            for nom in range(len(indice_nombres)):
+               nombre = indice_nombres[nom]
+               print(nombre)
 
           #Insertar pinturas en la bd e indices
-        if op == 1:           
+        if op == 1:       
+            #todas las validaciones e inserciones estan en el archivo tools    
             cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
             nombre = check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")
             precio = check_num(False, "Introduzca el precio de la pintura\n==>")
@@ -43,9 +58,14 @@ def main():
                                   \n2.- En exhibición
                                   \n==>''')
             
-            pintura = Pintura(cota, nombre.capitalize(), precio, anho, status, True)
+            pintura = Pintura(cota, nombre.lower().capitalize(), precio, anho, status, True)
 
-            pinturas_db.append(pintura)
+            #insercion de la pintura en la lista
+            pinturas_db, pintura_pos = insertPainting(pintura,pinturas_db)             
+
+            #insercion de su referencia en los indices correspondientes
+            indice_cotas = insertIdIndex(cota, pintura_pos, indice_cotas)
+            indice_nombres = insertNameIndex(nombre.lower().capitalize(), pintura_pos, indice_nombres)
 
           #Consultar pinturas
         if op == 2:  
