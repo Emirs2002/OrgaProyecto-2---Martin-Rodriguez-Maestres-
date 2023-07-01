@@ -29,19 +29,21 @@ def main():
                pintura.showPintura()
                print("")
                print("")
-               print("")
-               print("")
+               
 
 
           #Insertar pinturas en la bd e indices
         if op == 1:           
-            cota = check_cota("Introduzca la cota de la pintura\n==>")
-            nombre = check_let("Introduzca el nombre de la pintura\n==>")
+            cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
+            nombre = check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")
             precio = check_num(False, "Introduzca el precio de la pintura\n==>")
-            anho = check_num(True, "Introduzca el año de la pintura\n==>")
-            status = check_status("Introduzca el status de la pintura\n==>")
+            anho = check_num(True, "Introduzca el año de la pintura. Ejemplo '2023'\n==>")
+            status = check_status('''Indique el estado de la pintura
+                                  \n1.- En mantenimiento
+                                  \n2.- En exhibición
+                                  \n==>''')
             
-            pintura = Pintura(cota, nombre.capitalize(), precio, anho, status.capitalize(), True)
+            pintura = Pintura(cota, nombre.capitalize(), precio, anho, status, True)
 
             pinturas_db.append(pintura)
 
