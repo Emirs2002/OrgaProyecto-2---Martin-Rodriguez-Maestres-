@@ -41,7 +41,7 @@ def check_num(anho, msg):
         num = input(msg)   
         if (num.replace(",", "").isnumeric()) and (" " not in num) and (int(num)>0):
             if anho == True:
-                if len(num) != 4:
+                if (len(num) != 4) or (int(num)>2023):
                     print("Introduzca un año valido")
                     continue
                 else: 
@@ -74,6 +74,7 @@ def check_cota(msg):
     cotaValida = True
     cota = input(msg)
     cotaNew = "" #string donde se va a guardar la cota con las letras en mayuscula
+
     while True:
         print("")
         if (cota.isalnum()) and (len(cota) == 8) and (cotaValida == True):
@@ -82,8 +83,8 @@ def check_cota(msg):
             for let in range(0, 4):
                 letter = cota[let]
                 if letter.isalpha():
-                   cotaNew += letter.upper()
-                   pass
+                    cotaNew += letter.upper()
+                    pass
                 else:
                     cotaValida = False
                     break
@@ -99,7 +100,7 @@ def check_cota(msg):
                         cotaValida = False
                         break
 
-                 #ultima validacion para devolver la cota o un error
+                #ultima validacion para devolver la cota o un error
                 if cotaValida == True:
                     break
                 else:
@@ -114,8 +115,26 @@ def check_cota(msg):
             cota = input(msg)
             cotaNew = ""
             continue
-    
+
     return cotaNew
+        
+#VERIFICAR QUE LA COTA Y EL NOMBRE NO ESTEN REPETIDOS
+
+def check_list(tipo, valor, indice_lista):
+    alreadyExists = False
+
+    if tipo == "cota":
+        for cot in range(len(indice_lista)):
+            cotaDic = indice_lista[cot]
+            if cotaDic["cota"] == valor:
+                alreadyExists = True
+    else: 
+        for nom in range(len(indice_lista)):
+            nomDic = indice_lista[nom]
+            if nomDic["nombre"] == valor:
+                alreadyExists = True
+        
+    return alreadyExists
 
 #####           INSERCION PINTURAS      ######
 
@@ -134,22 +153,22 @@ def insertPainting(painting, painting_db):
 # INDICE DE LAS COTAS
 
 def insertIdIndex(cota, pos, indice_cotas):
-    dicCota = {"cota": cota, "posicion":pos}
+    dicCota = {"cota": cota, "posicion": pos}
 
     indice_cotas.append(dicCota)
     
-    sorted_indice_cotas = sorted(indice_cotas, key=lambda x:x["cota"])
+    sorted_indice_cotas = sorted(indice_cotas, key=lambda x:x["cota"]) #ordenar la lista de menor a mayor por valor de cota
 
     return sorted_indice_cotas
 
 
 #INDICE DE LOS NOMBRES
 def insertNameIndex(nombre, pos, indice_nombres):
-    dicName = {"nombre":nombre, "posicion": pos}
+    dicName = {"nombre": nombre, "posicion": pos}
 
     indice_nombres.append(dicName)
 
-    sorted_indice_nombres = sorted(indice_nombres, key=lambda x:x["nombre"])
+    sorted_indice_nombres = sorted(indice_nombres, key=lambda x:x["nombre"]) #ordenar el la lista de menor a mayor por valor de nombre
 
     return sorted_indice_nombres
 

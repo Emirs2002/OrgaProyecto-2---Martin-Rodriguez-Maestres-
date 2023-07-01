@@ -27,6 +27,7 @@ def main():
             \n6.- Guardar y Salir
             \n==>''') 
         if op == 0:
+            #ESTE CODIGO ES PARA VER SI TODO SE ESTA GUARDANDO CORRECTAMENTE, LQM
             for pint in range(len(pinturas_db)):
                pintura = pinturas_db[pint]
                print(f"PINTURA {pint+1}")
@@ -48,24 +49,44 @@ def main():
 
           #Insertar pinturas en la bd e indices
         if op == 1:       
-            #todas las validaciones e inserciones estan en el archivo tools    
-            cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
-            nombre = check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")
+            #todas las validaciones e inserciones estan en el archivo tools  
+            alreadyExists = False
+            while True:
+              
+              cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
+              alreadyExists = check_list("cota", cota, indice_cotas)
+
+              if alreadyExists == True:
+                print("Error, la cota ingresada pertenece a otra pintura. Ingrese otra cota nuevamente.")
+                print("")
+              else:
+                 break
+            
+            while True:
+              nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
+              alreadyExists = check_list("nombre", nombre, indice_nombres)
+
+              if alreadyExists == True:
+                print("Error, el nombre ingresado pertenece a otra pintura. Por favor, ingrese otro nombre.")
+                print("")
+              else:
+                break
+            
             precio = check_num(False, "Introduzca el precio de la pintura\n==>")
-            anho = check_num(True, "Introduzca el año de la pintura. Ejemplo '2023'\n==>")
+            anho = check_num(True, "Introduzca el año de creación de la pintura. Ejemplo '2023'\n==>")
             status = check_status('''Indique el estado de la pintura
                                   \n1.- En mantenimiento
                                   \n2.- En exhibición
                                   \n==>''')
             
-            pintura = Pintura(cota, nombre.lower().capitalize(), precio, anho, status, True)
+            pintura = Pintura(cota, nombre, precio, anho, status, True)
 
             #insercion de la pintura en la lista
             pinturas_db, pintura_pos = insertPainting(pintura,pinturas_db)             
 
             #insercion de su referencia en los indices correspondientes
             indice_cotas = insertIdIndex(cota, pintura_pos, indice_cotas)
-            indice_nombres = insertNameIndex(nombre.lower().capitalize(), pintura_pos, indice_nombres)
+            indice_nombres = insertNameIndex(nombre, pintura_pos, indice_nombres)
 
           #Consultar pinturas
         if op == 2:  
