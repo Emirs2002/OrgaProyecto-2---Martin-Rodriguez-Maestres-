@@ -174,29 +174,16 @@ def insertNameIndex(nombre, pos, indice_nombres):
 
 #####       BÚSQUEDA       ######
 
-# Por cota
-def searchById(array, first, last, x):
+# Segun el tipo de indice (index_type)
+def search(index_type, array, first, last, x):
     if first <= last:
         mid = (first + last) // 2
-        if x == array[mid]["cota"]:
+        if x == array[mid][index_type]:
             return array[mid]["posicion"]
-        if x < array[mid]["cota"]:
-            return searchById(array, first, mid - 1, x)
+        if x < array[mid][index_type]:
+            return search(index_type, array, first, mid - 1, x)
         else:
-            return searchById(array, mid + 1, last, x)
-    else:
-        return -1
-
-# Por nombre
-def searchByName(array, first, last, x):
-    if first <= last:
-        mid = (first + last) // 2
-        if x == array[mid]["nombre"]:
-            return array[mid]["posicion"]
-        if x < array[mid]["nombre"]:
-            return searchByName(array, first, mid - 1, x)
-        else:
-            return searchByName(array, mid + 1, last, x)
+            return search(index_type, array, mid + 1, last, x)
     else:
         return -1
 
