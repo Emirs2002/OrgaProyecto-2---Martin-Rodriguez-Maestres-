@@ -23,3 +23,9 @@ class Pintura:
             self.status = status
             print(f"La pintura ahora está {(self.status).lower()}")
 
+    def deleteLogical(self, exists):
+        if self.exists == exists:
+            print("La pintura ya fue eliminada lógicamente")
+        else:
+            self.exists = exists
+            print("La pintura se eliminó lógicamente")
