@@ -39,7 +39,7 @@ def check_num(anho, msg):
     while True:
         print("")
         num = input(msg)   
-        if (num.replace(",", "").isnumeric()) and (" " not in num) and (int(num)>0):
+        if (num.isnumeric()) and (" " not in num) and (int(num)>0):
             if anho == True:
                 if (len(num) != 4) or (int(num)>2023):
                     print("Introduzca un año valido")
@@ -52,7 +52,7 @@ def check_num(anho, msg):
                 continue    
     return num
 
-#valir el estado de la pintura
+#validar el estado de la pintura
 
 def check_status(msg):
     while True:
@@ -174,7 +174,18 @@ def insertNameIndex(nombre, pos, indice_nombres):
 
 #####       BÚSQUEDA       ######
 
-
+# Segun el tipo de indice (index_type)
+def search(index_type, array, first, last, x):
+    if first <= last:
+        mid = (first + last) // 2
+        if x == array[mid][index_type]:
+            return array[mid]["posicion"]
+        if x < array[mid][index_type]:
+            return search(index_type, array, first, mid - 1, x)
+        else:
+            return search(index_type, array, mid + 1, last, x)
+    else:
+        return -1
 
 #####       GUARDADO Y CARGA       ######
 

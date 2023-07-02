@@ -91,16 +91,28 @@ def main():
           #Consultar pinturas
         if op == 2:  
               while True:    
-                op2 = check_op(1, 3, '''Ingrese la opción que desea realizar:     
+                op2 = check_op(1, 3, '''Ingrese la opción de búsqueda que desea realizar:     
                             \n1.- Por cota
                             \n2.- Por nombre
                             \n3.- Volver al menú principal
                             \n-->''') 
                 if op2 == 1:
-                  print('por cota')   
+                  cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
+                  indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                  if indice_pintura != -1:
+                    pintura_buscada = pinturas_db[indice_pintura]
+                    pintura_buscada.showPintura()
+                  else:
+                    print("La pintura consultada no fue encontrada.")
 
                 if op2 == 2:
-                  print('por nombre')   
+                  nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
+                  indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                  if indice_pintura != -1:
+                    pintura_buscada = pinturas_db[indice_pintura]
+                    pintura_buscada.showPintura()
+                  else:
+                    print("La pintura consultada no fue encontrada.")
 
                 if op2 == 3:
                   break                   
@@ -114,19 +126,94 @@ def main():
                             \n2.- Poner en mantenimiento
                             \n3.- Volver al menú principal
                             \n-->''')                            
-                if op3 == 1:
-                  print('exhibicion')   
+                if op3 == 1:  
+                    op31 = check_op(1, 3, '''Ingrese la opción de búsqueda que desea realizar:     
+                                \n1.- Por cota
+                                \n2.- Por nombre
+                                \n3.- Volver al menú anterior
+                                \n-->''')
+                    
+                    if op31 == 1:
+                      cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
+                      indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                      if indice_pintura != -1:
+                        pintura_buscada = pinturas_db[indice_pintura]
+                        pintura_buscada.changeStatus("En exhibición")
+                      else:
+                        print("La pintura consultada no fue encontrada.")
+                    
+                    if op31 == 2:
+                      nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
+                      indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                      if indice_pintura != -1:
+                        pintura_buscada = pinturas_db[indice_pintura]
+                        pintura_buscada.changeStatus("En exhibición")
+                      else:
+                        print("La pintura consultada no fue encontrada.")
+                    
+                    if op31 == 3:
+                       pass
 
-                if op3 == 2:
-                  print('mantenimiento')   
+                if op3 == 2:    
+                    op32 = check_op(1, 3, '''Ingrese la opción de búsqueda que desea realizar:     
+                                \n1.- Por cota
+                                \n2.- Por nombre
+                                \n3.- Volver al menú anterior
+                                \n-->''')
+                    
+                    if op32 == 1:
+                      cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
+                      indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                      if indice_pintura != -1:
+                        pintura_buscada = pinturas_db[indice_pintura]
+                        pintura_buscada.changeStatus("En mantenimiento")
+                      else:
+                        print("La pintura consultada no fue encontrada.")
+                    
+                    if op32 == 2:
+                      nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
+                      indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                      if indice_pintura != -1:
+                        pintura_buscada = pinturas_db[indice_pintura]
+                        pintura_buscada.changeStatus("En mantenimiento")
+                      else:
+                        print("La pintura consultada no fue encontrada.")
+                    
+                    if op32 == 3:
+                       pass
 
                 if op3 == 3:
                   break      
             
             #Eliminacion logica de la pintura
         if op == 4:     
+          while True:    
+            op4 = check_op(1, 3, '''Ingrese la opción de búsqueda que desea realizar:     
+                        \n1.- Por cota
+                        \n2.- Por nombre
+                        \n3.- Volver al menú principal
+                        \n-->''')
 
-          print("a")
+            if op4 == 1:
+              cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
+              indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+              if indice_pintura != -1:
+                pintura_buscada = pinturas_db[indice_pintura]
+                pintura_buscada.deleteLogical(False)
+              else:
+                print("La pintura consultada no fue encontrada.")
+            
+            if op4 == 2:
+              nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
+              indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+              if indice_pintura != -1:
+                pintura_buscada = pinturas_db[indice_pintura]
+                pintura_buscada.deleteLogical(False)
+              else:
+                print("La pintura consultada no fue encontrada.")
+            
+            if op4 == 3:
+              break
            
             #Compactacion
         if op == 5:  

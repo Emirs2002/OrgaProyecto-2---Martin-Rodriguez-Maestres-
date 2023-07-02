@@ -15,4 +15,17 @@ class Pintura:
                 \n-Año: {self.anho}
                 \n-Status: {self.status}
                 \n-Existencia: {self.exists}''')
+        
+    def changeStatus(self, status):
+        if self.status == status:
+            print(f"La pintura ya está {(self.status).lower()}")
+        else:
+            self.status = status
+            print(f"La pintura ahora está {(self.status).lower()}")
 
+    def deleteLogical(self, exists):
+        if self.exists == exists:
+            print("La pintura ya fue eliminada lógicamente")
+        else:
+            self.exists = exists
+            print("La pintura se eliminó lógicamente")
