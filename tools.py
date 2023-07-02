@@ -39,7 +39,7 @@ def check_num(anho, msg):
     while True:
         print("")
         num = input(msg)   
-        if (num.replace(",", "").isnumeric()) and (" " not in num) and (int(num)>0):
+        if (num.isnumeric()) and (" " not in num) and (int(num)>0):
             if anho == True:
                 if (len(num) != 4) or (int(num)>2023):
                     print("Introduzca un año valido")
