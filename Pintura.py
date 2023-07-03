@@ -13,8 +13,7 @@ class Pintura:
                 \n-Nombre: {self.nombre}
                 \n-Precio: ${self.precio}
                 \n-Año: {self.anho}
-                \n-Status: {self.status}
-                \n-Existencia: {self.exists}''')
+                \n-Status: {self.status}''')
         
     def changeStatus(self, status):
         if self.status == status:

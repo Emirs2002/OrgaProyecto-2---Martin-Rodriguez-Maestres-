@@ -112,7 +112,10 @@ def main():
                   indice_pintura = indice_pintura_array[0]
                   if indice_pintura != -1:
                     pintura_buscada = pinturas_db[indice_pintura]
-                    pintura_buscada.showPintura()
+                    if pintura_buscada.exists == True:
+                      pintura_buscada.showPintura()
+                    else:
+                      print("La pintura consultada no existe.")
                   else:
                     print("La pintura consultada no fue encontrada.")
 
@@ -122,7 +125,10 @@ def main():
                   indice_pintura = indice_pintura_array[0]
                   if indice_pintura != -1:
                     pintura_buscada = pinturas_db[indice_pintura]
-                    pintura_buscada.showPintura()
+                    if pintura_buscada.exists == True:
+                      pintura_buscada.showPintura()
+                    else:
+                      print("La pintura consultada no existe.")
                   else:
                     print("La pintura consultada no fue encontrada.")
 
@@ -151,7 +157,10 @@ def main():
                       indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
-                        pintura_buscada.changeStatus("En exhibición")
+                        if pintura_buscada.exists == True:
+                          pintura_buscada.changeStatus("En exhibición")
+                        else:
+                          print("La pintura consultada no existe.")
                       else:
                         print("La pintura consultada no fue encontrada.")
                     
@@ -161,7 +170,10 @@ def main():
                       indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
-                        pintura_buscada.changeStatus("En exhibición")
+                        if pintura_buscada.exists == True:
+                          pintura_buscada.changeStatus("En exhibición")
+                        else:
+                          print("La pintura consultada no existe.")
                       else:
                         print("La pintura consultada no fue encontrada.")
                     
@@ -181,7 +193,10 @@ def main():
                       indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
-                        pintura_buscada.changeStatus("En mantenimiento")
+                        if pintura_buscada.exists == True:
+                          pintura_buscada.changeStatus("En mantenimiento")
+                        else:
+                          print("La pintura consultada no existe.")
                       else:
                         print("La pintura consultada no fue encontrada.")
                     
@@ -191,7 +206,10 @@ def main():
                       indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
-                        pintura_buscada.changeStatus("En mantenimiento")
+                        if pintura_buscada.exists == True:
+                          pintura_buscada.changeStatus("En mantenimiento")
+                        else:
+                          print("La pintura consultada no fue encontrada.")
                       else:
                         print("La pintura consultada no fue encontrada.")
                     
@@ -216,7 +234,10 @@ def main():
               indice_pintura = indice_pintura_array[0]
               if indice_pintura != -1:
                 pintura_buscada = pinturas_db[indice_pintura]
-                pintura_buscada.deleteLogical(False)
+                if pintura_buscada.exists == True:
+                  pintura_buscada.deleteLogical(False)
+                else:
+                  print("La pintura consultada no existe.")
               else:
                 print("La pintura consultada no fue encontrada.")
             
@@ -226,7 +247,10 @@ def main():
               indice_pintura = indice_pintura_array[0]
               if indice_pintura != -1:
                 pintura_buscada = pinturas_db[indice_pintura]
-                pintura_buscada.deleteLogical(False)
+                if pintura_buscada.exists == True:
+                  pintura_buscada.deleteLogical(False)
+                else:
+                  print("La pintura consultada no existe.")
               else:
                 print("La pintura consultada no fue encontrada.")
             
