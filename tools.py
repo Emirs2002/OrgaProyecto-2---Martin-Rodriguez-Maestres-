@@ -1,4 +1,4 @@
-
+import pickle
 #####       VALIDACIONES      #####
 
 #validar números en un rango específico
@@ -179,13 +179,33 @@ def search(index_type, array, first, last, x):
     if first <= last:
         mid = (first + last) // 2
         if x == array[mid][index_type]:
-            return array[mid]["posicion"]
+            return [array[mid]["posicion"], mid]
         if x < array[mid][index_type]:
             return search(index_type, array, first, mid - 1, x)
         else:
             return search(index_type, array, mid + 1, last, x)
     else:
-        return -1
+        return [-1, last + 1]
 
 #####       GUARDADO Y CARGA       ######
 
+# Guardado de datos
+def save(pictures, nicks, names):
+    data = [pictures, nicks, names]
+    try:
+        f = open("Pictures.pkl", "wb")
+        pickle.dump(data, f)
+        f.close()
+    except:
+        print("Hubo un error al guardar el archivo")
+
+# Carga de datos
+def load():
+    try:
+        f = open("Pictures.pkl", "rb")
+        data = pickle.load(f)
+        f.close()
+        return data
+    except:
+        print("Hubo un error al cargar los datos")
+        return False

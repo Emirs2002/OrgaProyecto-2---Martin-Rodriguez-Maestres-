@@ -47,6 +47,16 @@ def main():
                nombre = indice_nombres[nom]
                print(nombre)
 
+            # Carga de datos
+            arrays = load()
+            if arrays != False:
+              pinturas_db = arrays[0]
+              indice_cotas = arrays[1]
+              indice_nombres = arrays[2]
+
+              print("")
+              print("¡Carga de archivos lista!")
+              print("")
           #Insertar pinturas en la bd e indices
         if op == 1:       
             #todas las validaciones e inserciones estan en el archivo tools  
@@ -98,7 +108,8 @@ def main():
                             \n-->''') 
                 if op2 == 1:
                   cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
-                  indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                  indice_pintura_array = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                  indice_pintura = indice_pintura_array[0]
                   if indice_pintura != -1:
                     pintura_buscada = pinturas_db[indice_pintura]
                     pintura_buscada.showPintura()
@@ -107,7 +118,8 @@ def main():
 
                 if op2 == 2:
                   nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
-                  indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                  indice_pintura_array = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                  indice_pintura = indice_pintura_array[0]
                   if indice_pintura != -1:
                     pintura_buscada = pinturas_db[indice_pintura]
                     pintura_buscada.showPintura()
@@ -135,7 +147,8 @@ def main():
                     
                     if op31 == 1:
                       cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
-                      indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                      indice_pintura_array = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                      indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
                         pintura_buscada.changeStatus("En exhibición")
@@ -144,7 +157,8 @@ def main():
                     
                     if op31 == 2:
                       nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
-                      indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                      indice_pintura_array = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                      indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
                         pintura_buscada.changeStatus("En exhibición")
@@ -163,7 +177,8 @@ def main():
                     
                     if op32 == 1:
                       cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
-                      indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                      indice_pintura_array = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+                      indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
                         pintura_buscada.changeStatus("En mantenimiento")
@@ -172,7 +187,8 @@ def main():
                     
                     if op32 == 2:
                       nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
-                      indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                      indice_pintura_array = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+                      indice_pintura = indice_pintura_array[0]
                       if indice_pintura != -1:
                         pintura_buscada = pinturas_db[indice_pintura]
                         pintura_buscada.changeStatus("En mantenimiento")
@@ -196,7 +212,8 @@ def main():
 
             if op4 == 1:
               cota = check_cota("Introduzca la cota de la pintura. \nDebe tener 4 letras seguido de 4 números. Ejemplo: 'ABDC1234'\n==>")
-              indice_pintura = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+              indice_pintura_array = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+              indice_pintura = indice_pintura_array[0]
               if indice_pintura != -1:
                 pintura_buscada = pinturas_db[indice_pintura]
                 pintura_buscada.deleteLogical(False)
@@ -205,7 +222,8 @@ def main():
             
             if op4 == 2:
               nombre = (check_nom("Introduzca el nombre de la pintura (máx. 10 caracteres)\n==>")).lower().capitalize()
-              indice_pintura = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+              indice_pintura_array = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+              indice_pintura = indice_pintura_array[0]
               if indice_pintura != -1:
                 pintura_buscada = pinturas_db[indice_pintura]
                 pintura_buscada.deleteLogical(False)
@@ -216,12 +234,37 @@ def main():
               break
            
             #Compactacion
-        if op == 5:  
-          print("a")
-            
+        if op == 5:
+          op5 = check_op(1, 2, '''¿Está seguro/a de proseguir con la compactación?:     
+                        \n1.- Si
+                        \n2.- No
+                        \n-->''')
+          if op5 == 1:
+            num = 0
+            while num < len(pinturas_db):
+              picture = pinturas_db[num]
+              nombre = picture.nombre
+              cota = picture.cota
+              indice_nombre_array = search("nombre", indice_nombres, 0, len(indice_nombres) - 1, nombre)
+              nombre_index = indice_nombre_array[1]
+              indice_cota_array = search("cota", indice_cotas, 0, len(indice_cotas) - 1, cota)
+              cota_index = indice_cota_array[1]
+              if picture.exists == True:
+                indice_nombres[nombre_index].update({"posicion": num})
+                indice_cotas[cota_index].update({"posicion": num})
+                picture.showPintura()
+                num += 1
+              else:
+                del pinturas_db[num]
+                del indice_nombres[nombre_index]
+                del indice_cotas[cota_index]
+            print("¡Compactación terminada!")
 
         if op == 6:   #Salir de la aplicación y guardar en txt
-            print("¡Hasta pronto!")
+            save(pinturas_db, indice_cotas, indice_nombres)
+            print("""
+            ¡Hasta pronto!
+            """)
             break
         
 main()
