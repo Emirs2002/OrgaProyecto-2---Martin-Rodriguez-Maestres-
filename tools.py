@@ -1,12 +1,14 @@
 import pickle
+
 #####       VALIDACIONES      #####
 
-#validar números en un rango específico
+# validar números en un rango específico
+
 
 def check_op(lim1, lim2, msg):
     while True:
         print("")
-        num = input(msg)        
+        num = input(msg)
         if num.replace(" ", "").isnumeric():
             num = int(num)
             if num < lim1 or num > lim2:
@@ -16,48 +18,54 @@ def check_op(lim1, lim2, msg):
                 break
         else:
             print("Error, ingrese un numero")
-            continue    
+            continue
     return num
 
-#validar palabras
+
+# validar palabras
+
 
 def check_nom(msg):
     while True:
         print("")
         word = input(msg)
-        #validar que sea letra, max 10 letras y que no haya espacios
+        # validar que sea letra, max 10 letras y que no haya espacios
         if word.isalpha() and len(word) <= 10 and " " not in word:
-             break
+            break
         else:
             print("Error, ingrese un nombre valido")
             continue
     return word
 
-#validar números 
+
+# validar números
+
 
 def check_num(anho, msg):
     while True:
         print("")
-        num = input(msg)   
-        if (num.isnumeric()) and (" " not in num) and (int(num)>0):
+        num = input(msg)
+        if (num.isnumeric()) and (" " not in num) and (int(num) > 0):
             if anho == True:
-                if (len(num) != 4) or (int(num)>2023):
+                if (len(num) != 4) or (int(num) > 2023):
                     print("Introduzca un año valido")
                     continue
-                else: 
+                else:
                     break
             break
         else:
-                print("Error, ingrese un numero")
-                continue    
+            print("Error, ingrese un numero")
+            continue
     return num
 
-#validar el estado de la pintura
+
+# validar el estado de la pintura
+
 
 def check_status(msg):
     while True:
-        op = check_op(1,2,msg)
-        
+        op = check_op(1, 2, msg)
+
         if op == 1:
             status = "En mantenimiento"
             break
@@ -69,17 +77,16 @@ def check_status(msg):
     return status
 
 
-#Validar la cota ingresada por el usuario
+# Validar la cota ingresada por el usuario
 def check_cota(msg):
     cotaValida = True
     cota = input(msg)
-    cotaNew = "" #string donde se va a guardar la cota con las letras en mayuscula
+    cotaNew = ""  # string donde se va a guardar la cota con las letras en mayuscula
 
     while True:
         print("")
         if (cota.isalnum()) and (len(cota) == 8) and (cotaValida == True):
-            
-            #Validar que los primeros 4 caracteres sean letras
+            # Validar que los primeros 4 caracteres sean letras
             for let in range(0, 4):
                 letter = cota[let]
                 if letter.isalpha():
@@ -88,10 +95,10 @@ def check_cota(msg):
                 else:
                     cotaValida = False
                     break
-            
-            #Validar que los siguientes 4 caracteres sean numeros
+
+            # Validar que los siguientes 4 caracteres sean numeros
             if cotaValida == True:
-                for num in range(4,8):
+                for num in range(4, 8):
                     number = cota[num]
                     if number.isnumeric():
                         cotaNew += number
@@ -100,7 +107,7 @@ def check_cota(msg):
                         cotaValida = False
                         break
 
-                #ultima validacion para devolver la cota o un error
+                # ultima validacion para devolver la cota o un error
                 if cotaValida == True:
                     break
                 else:
@@ -109,7 +116,7 @@ def check_cota(msg):
             else:
                 pass
 
-        else: 
+        else:
             print("Error, ingrese una cota valida")
             cotaValida = True
             cota = input(msg)
@@ -117,8 +124,10 @@ def check_cota(msg):
             continue
 
     return cotaNew
-        
-#VERIFICAR QUE LA COTA Y EL NOMBRE NO ESTEN REPETIDOS
+
+
+# VERIFICAR QUE LA COTA Y EL NOMBRE NO ESTEN REPETIDOS
+
 
 def check_list(tipo, valor, indice_lista):
     alreadyExists = False
@@ -128,51 +137,61 @@ def check_list(tipo, valor, indice_lista):
             cotaDic = indice_lista[cot]
             if cotaDic["cota"] == valor:
                 alreadyExists = True
-    else: 
+    else:
         for nom in range(len(indice_lista)):
             nomDic = indice_lista[nom]
             if nomDic["nombre"] == valor:
                 alreadyExists = True
-        
+
     return alreadyExists
 
+
 #####           INSERCION PINTURAS      ######
+
 
 def insertPainting(painting, painting_db):
     if len(painting_db) == 0:
         pintura_pos = 0
         painting_db.append(painting)
     else:
-        pintura_pos = (len(painting_db))
+        pintura_pos = len(painting_db)
         painting_db.append(painting)
-    
+
     return painting_db, pintura_pos
+
 
 #####       INSERCION DE ELEMENTOS EN LOS INDICES       ######
 
 # INDICE DE LAS COTAS
 
+
 def insertIdIndex(cota, pos, indice_cotas):
     dicCota = {"cota": cota, "posicion": pos}
 
     indice_cotas.append(dicCota)
-    
-    sorted_indice_cotas = sorted(indice_cotas, key=lambda x:x["cota"]) #ordenar la lista de menor a mayor por valor de cota
+
+    sorted_indice_cotas = sorted(
+        indice_cotas, key=lambda x: x["cota"]
+    )  # ordenar la lista de menor a mayor por valor de cota
 
     return sorted_indice_cotas
 
 
-#INDICE DE LOS NOMBRES
+# INDICE DE LOS NOMBRES
 def insertNameIndex(nombre, pos, indice_nombres):
     dicName = {"nombre": nombre, "posicion": pos}
 
     indice_nombres.append(dicName)
 
-    sorted_indice_nombres = sorted(indice_nombres, key=lambda x:x["nombre"]) #ordenar el la lista de menor a mayor por valor de nombre
+    sorted_indice_nombres = sorted(
+        indice_nombres, key=lambda x: x["nombre"]
+    )  # ordenar el la lista de menor a mayor por valor de nombre
 
     return sorted_indice_nombres
 
+
 #####       BÚSQUEDA       ######
+
 
 # Segun el tipo de indice (index_type)
 def search(index_type, array, first, last, x):
@@ -187,7 +206,9 @@ def search(index_type, array, first, last, x):
     else:
         return [-1, last + 1]
 
+
 #####       GUARDADO Y CARGA       ######
+
 
 # Guardado de datos
 def save(pictures, nicks, names):
@@ -198,6 +219,7 @@ def save(pictures, nicks, names):
         f.close()
     except:
         print("Hubo un error al guardar el archivo")
+
 
 # Carga de datos
 def load():
